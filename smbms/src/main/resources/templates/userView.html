@@ -1,0 +1,78 @@
+﻿<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Insert title here</title>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}">
+	<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+</head>
+
+<body>
+<div class="main">
+	<div class="optitle clearfix">
+		<div class="title">用户管理&gt;&gt;</div>
+	</div>
+	<div class="content">
+		<table class="box">
+			<tbody>
+			<tr>
+				<td class="field">编号：</td>
+				<td>
+					<span class="STYLE1" th:text="${user.id}"></span>
+					<input type="hidden" id="userId" th:value="${user.id}">
+				</td>
+			</tr>
+			<tr>
+				<td class="field">用户名：</td>
+				<td><span class="STYLE1" th:text="${user.userName}"></span></td>
+			</tr>
+			<tr>
+				<td class="field">用户编码：</td>
+				<td><span class="STYLE1" th:text="${user.userCode}"></span></td>
+			</tr>
+			<tr>
+				<td class="field">性别：</td>
+				<td>
+					<span class="STYLE1" th:if="${(user.gender==1)}">男</span>
+					<span class="STYLE1" th:if="${(user.gender==2)}">女</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="field">出生日期：</td>
+				<td><span class="STYLE1" th:text="${#dates.format(user.birthday, 'yyyy-MM-dd')}"></span></td>
+			</tr>
+			<tr>
+				<td class="field">年龄：</td>
+				<td><span class="STYLE1" th:text="${age}"></span></td>
+			</tr>
+			<tr>
+				<td class="field">电话：</td>
+				<td><span class="STYLE1" th:text="${user.phone}"></span></td>
+			</tr>
+			<tr>
+				<td class="field">地址：</td>
+				<td><span class="STYLE1" th:text="${user.address}"></span></td>
+			</tr>
+			<tr>
+				<td class="field">权限：</td>
+				<td>
+					<span class="STYLE1" th:if="${(user.userType==1)}">系统管理员</span>
+					<span class="STYLE1" th:if="${(user.userType==2)}">经理</span>
+					<span class="STYLE1" th:if="${(user.userType==3)}">普通员工</span>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="buttons">
+		<input type="button" id="update" value="修改" class="input-button">
+		<input type="button" id="del" value="删除" class="input-button">
+		<input type="button" id="repassword" value="重置密码" class="input-button">
+		<input type="button" id="backButton" value="返回" onclick="history.back(-1)"  class="input-button">
+	</div>
+</div>
+<script type="text/javascript" th:src="@{/js/user/view.js}"></script>
+
+</body>
+
+</html>
+

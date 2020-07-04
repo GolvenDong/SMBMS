@@ -1,0 +1,41 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>超市账单管理系统</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<script type="text/javascript">
+	function logout() {
+		top.location = "/user/logOut";
+	}
+</script>
+</head>
+<body class="frame-bd">
+	<ul class="left-menu">
+		<li><a href="bill/billList" target="mainFrame"><img
+				src="images/btn_bill.gif" />
+		</a>
+		</li>
+		<li><a href="provider/providerList" target="mainFrame"><img
+				src="images/btn_suppliers.gif" />
+		</a>
+		</li>
+		<li><a th:href="@{/user/showUserList}" target="mainFrame"><img
+				src="/images/btn_users.gif" />
+		</a>
+		</li>	
+		<li><a th:href="@{'/user/toupdatePwd?id='+${id}}" target="mainFrame"><img
+				src="images/btn_password.gif" />
+		</a>
+		</li>
+		<li><a href="#" onClick="logout();"><img
+				th:src="@{images/btn_exit.gif}" />
+		</a>
+		</li>
+	</ul>
+</body>
+</html>

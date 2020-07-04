@@ -1,0 +1,149 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>超市账单管理系统-用户管理</title>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/amazeui/assets/css/amazeui.css}"/>
+	<script type="text/javascript" th:src="@{/amazeui/assets/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/amazeui/assets/js/amazeui.js}"></script>
+	<script type="text/javascript" th:src="@{/amazeui/pagination/amazeui-pagination.js}"></script>
+</head>
+<body>
+
+<div class="menu">
+
+	<table>
+		<tbody>
+		<tr>
+			<td>
+				<form method="post" action="/user/showUserList">
+					<input name="method" value="query" class="input-text" type="hidden"> 用户名：
+					<input name="userNameSearch" class="input-text" type="text" value="">&nbsp;&nbsp;&nbsp;&nbsp;
+					<!--<input value="查 询" type="submit">-->
+					<button style="width:49px;height:30px;" id="btn">查询</button>
+				</form>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<div class="main">
+
+	<div class="optitle clearfix">
+		<em>
+			<input value="添加用户" class="input-button" onclick="window.location='/user/addAUser'" type="button">
+		</em>
+		<div class="title">用户管理&gt;&gt;</div>
+	</div>
+	<div class="content">
+		<table class="list">
+			<tbody>
+			<tr>
+				<td width="70" height="29"><div class="STYLE1" align="center">编号</div>
+				</td>
+				<td width="80"><div class="STYLE1" align="center">用户名</div>
+				</td>
+				<td width="80"><div class="STYLE1" align="center">用户编码</div>
+				</td>
+				<td width="100"><div class="STYLE1" align="center">性别</div>
+				</td>
+				<td width="100"><div class="STYLE1" align="center">年龄</div>
+				</td>
+				<td width="150"><div class="STYLE1" align="center">电话</div>
+				</td>
+				<td width="150"><div class="STYLE1" align="center">权限</div>
+				</td>
+			</tr>
+
+			<tr th:each="user:${users}">
+				<td height="23">
+					<span class="STYLE1" th:text="${user.id}"></span>
+				</td>
+				<td>
+					<span class="STYLE1" th:text="${user.userName}"></span>
+				</td>
+				<td>
+					<span class="STYLE1"><a th:href="@{'/user/showUser?id='+${user.id}+'&age='+${age.get(userStat.index)}}" th:text="${user.userCode}"></a></span>
+				</td>
+				<td>
+					<span class="STYLE1" th:if="${(user.gender==1)}"> 男 </span>
+					<span class="STYLE1" th:if="${(user.gender==2)}"> 女 </span>
+				</td>
+				<td>
+					<span class="STYLE1" th:text="${age.get(userStat.index)}"></span>
+				</td>
+				<td>
+					<span class="STYLE1" th:text="${user.phone}"></span>
+				</td>
+				<td>
+					<span class="STYLE1" th:if="${(user.userType==1)}">系统管理员</span>
+					<span class="STYLE1" th:if="${(user.userType==2)}">经理</span>
+					<span class="STYLE1" th:if="${(user.userType==3)}">普通员工</span>
+				</td>
+			</tr>
+
+			<!--					<tr>-->
+			<!--						<td height="23"><span class="STYLE1">1</span>-->
+			<!--						</td>-->
+			<!--						<td><span class="STYLE1"> 秦守新 </span>-->
+			<!--						</td>-->
+			<!--						<td><span class="STYLE1"><a href="userView.html" style="color:red"> shouxin.qin</a>-->
+			<!--						</span>-->
+			<!--						</td>-->
+
+			<!--						<td><span class="STYLE1">-->
+			<!--						-->
+			<!--							男-->
+			<!--							-->
+			<!--						-->
+			<!--						 </span>-->
+			<!--						</td>-->
+			<!--						<td><span class="STYLE1"> 2</span>-->
+			<!--						</td>-->
+			<!--						<td><span class="STYLE1">111</span>-->
+			<!--						</td>-->
+			<!--						<td><span class="STYLE1">-->
+			<!--						-->
+			<!--						-->
+			<!--							-->
+			<!--							普通员工-->
+			<!--							-->
+			<!--						-->
+			<!--					     </span>-->
+			<!--						</td>-->
+			<!--					</tr>-->
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="am-container">
+	<ul class="am-pagination am-pagination-centered"></ul>
+</div>
+
+<input type="hidden" id="pages" th:value="${page.get('pages')}">
+<input type="hidden" id="pageNum" th:value="${page.get('pageNo')}">
+</body>
+
+<script type="text/javascript">
+    var pages=$('#pages').val();
+    var current=$('#pageNum').val();
+
+    //5.创建分页
+    var pagination = new Pagination({
+        wrap: $('.am-pagination'),//存放分页内容
+        count: parseInt(pages),//总页数
+        current: parseInt(current),//当前页
+        prevText: '上一页', // prev 按钮的文本内容
+        nextText: '下一页', // next 按钮的文本内容
+        callback: function (current) { // 每一个页数按钮的回调事件
+            console.log(current);
+            // location.href="/users/show/?pageNo="+current;
+            // $("#admin-content").load("/showUserList/?pageNo="+current);
+            location.href="/user/showUserList/?pageNo="+current;
+        }
+    });
+</script>
+</html>
+

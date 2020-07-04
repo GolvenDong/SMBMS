@@ -1,0 +1,54 @@
+﻿<!DOCTYPE HTML>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Insert title here</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}">
+<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+</head>
+<body>
+	<div class="main">
+		<div class="optitle clearfix">
+			<div class="title">密码修改&gt;&gt;</div>
+		</div>
+		<form action="" method="post" id="form1">
+			<div class="content">
+
+				<table class="box"> 
+				  <input  type="hidden" id="userId" value="${userInfo.userId}"/>
+					 <tr>
+					<td class="field">旧密码：</td>
+					<td><input type="password" name="oldPwd" class="text" id="oldPassword"  /> <font color="red">*</font><font color="red" id="password_span"></font></td>
+				</tr>
+				 <tr>
+					<td class="field">新密码：</td>
+					<td><input type="password" name="newPwd" class="text" id="newPassword"  /> <font color="red">*</font></td>
+				</tr>
+				</table>
+
+			</div>
+			<div class="buttons">
+				<input type="button" id="update" value="修改" class="input-button" />
+			</div>
+		</form>
+	</div>
+	<script>
+		$(function () {
+			$("#update").click(function () {
+                var id = [[${id}]];
+                var oldPwd = $("#oldPassword").val();
+                var newPwd =$("#newPassword").val();
+				$.post("/user/updatePwd",{"oldPwd":oldPwd,"newPwd":newPwd,"id":id},function (data) {
+					console.log("abc");
+					if(data == "success"){
+						alert("修改成功");
+						$(".text").val("");
+						top.location = "/user/logOut"
+					}else{
+						alert("旧密码错误");
+					}
+				})
+			})
+		})
+	</script>
+</body>
+</html>

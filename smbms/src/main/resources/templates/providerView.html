@@ -1,0 +1,35 @@
+﻿<html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/amazeui/assets/css/amazeui.css}"/>
+	<script  th:src="@{/amazeui/assets/js/jquery.min.js}"></script>
+	<script  th:src="@{/amazeui/assets/js/amazeui.js}"></script>
+	<script  th:src="@{/amazeui/pagination/amazeui-pagination.js}"></script>
+<link type="text/css" rel="stylesheet" href="css/style.css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+	<div class="main">
+		<div class="optitle clearfix">
+			<div class="title">供应商管理&gt;&gt;</div>
+		</div>
+			<div class="content">
+				<table class="box"> 
+
+				</table>
+			</div>
+			<div class="buttons">
+				<input type="button" id="update" value="修改" class="input-button" >
+				<input type="button" id="del" value="删除" class="input-button"> 
+				<input type="button" id="backButton" onclick="history.back(-1)" value="返回" class="input-button">
+			</div>
+	</div>
+	<!--分页-->
+	<!-- 分页,详见 http://amazeui.shopxo.net/css/pagination/  -->
+	<div class="am-container" id="divpage">
+		<ul class="am-pagination am-pagination-centered" id="pageSelect">
+		</ul>
+	</div>
+	<script type="text/javascript" src="js/provider/view.js"></script>
+
+
+</body></html>
